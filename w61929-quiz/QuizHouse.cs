@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data;
 using System.IO;
 using System.Data.SqlClient;
-using w61929_quiz.QHDatabaseDataSetTableAdapters;
 
 namespace w61929_quiz
 {
@@ -15,16 +14,20 @@ namespace w61929_quiz
     /// </summary>
     static public class QuizHouse
     {
-        static string cnString = Properties.Settings.Default.QHDatabaseConnectionString;
+        static string cnString = @"Data Source=.\SQLEXPRESS;
+                            AttachDbFilename=c:\Users\HP\source\repos\w61929-quiz\w61929-quiz\Database.mdf;
+                            Integrated Security = True;
+                            Connect Timeout = 30;
+                            User Instance = True";
         static SqlConnection connection = new SqlConnection(cnString);
         public static User user = new User("id", "l", "p", 0, 0, 0);
 
         /// <summary>
-        /// Runs given Select query on database.
+        /// Runs given query on database.
         /// </summary>
         /// <param name="query">query sent to database</param>
         /// <returns><c>DataTable</c> class object.</returns>
-        static public DataTable SelectQuery(string query)
+        static public DataTable RunQuery(string query)
         {
             DataTable table = new DataTable();
             connection.Open();
@@ -46,30 +49,6 @@ namespace w61929_quiz
         }
 
         /// <summary>
-        /// Runs given Update query on database.
-        /// </summary>
-        /// <param name="query">update query</param>
-        static public void UpdateQuery(string query)
-        {
-            DataTable table = new DataTable();
-            connection.Open();
-
-            try
-            {
-                SqlDataAdapter adapter = new SqlDataAdapter("SELECT Id, Points FROM Users", connection);
-
-                adapter.Fill(table);
-                adapter.Update(table);
-            }
-            catch (Exception)
-            {
-                connection.Close();
-                throw new Exception("Could not load data");
-            }
-            connection.Close();
-        }
-
-        /// <summary>
         /// Sign In to QuizHouse system.
         /// </summary>
         /// <param name="uLogin">User login</param>
@@ -80,7 +59,7 @@ namespace w61929_quiz
             string query = String.Format("SELECT * FROM(SELECT *, ROW_NUMBER() OVER(ORDER BY Points DESC) as Rank FROM dbo.Users) AS Tab WHERE Login = '{0}' AND Password = '{1}'", uLogin, uPassword);
             try
             {
-                DataTable table = SelectQuery(query);
+                DataTable table = RunQuery(query);
                 DataRow[] row = table.Select();
 
                 string id = row[0]["Id"].ToString();
@@ -110,32 +89,43 @@ namespace w61929_quiz
             user.Points += points;
             user.Quizzes += 1;
 
-            string query = "SELECT Id, Points FROM Users";
-            QHDatabaseDataSet.UsersDataTable table = new QHDatabaseDataSet.UsersDataTable();
-            //DataTable table = new DataTable();
+            string query = "SELECT Id, Points, Quizzes FROM Users";
+
+            DataTable table = new DataTable();
             connection.Open();
 
             try
             {
+                SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+                SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
 
-                UsersTableAdapter adapter = new UsersTableAdapter();
+                adapter.UpdateCommand = new SqlCommand("UPDATE Users SET Points = @Points, Quizzes = @Quizzes WHERE Id = @Id", connection);
+                SqlParameter paramPoints = adapter.UpdateCommand.Parameters.Add("@Points", SqlDbType.Float);
+                paramPoints.SourceColumn = "Points";
+
+                SqlParameter paramQuizzes = adapter.UpdateCommand.Parameters.Add("@Quizzes", SqlDbType.Int);
+                paramQuizzes.SourceColumn = "Quizzes";
+
+                SqlParameter paramId = adapter.UpdateCommand.Parameters.Add("@Id", SqlDbType.Int);
+                paramId.SourceColumn = "Id";
+                paramId.SourceVersion = DataRowVersion.Original;
 
                 adapter.Fill(table);
 
-                UsersTableAdapter usersTableAdapter = new UsersTableAdapter();
-
-                foreach(DataRow row in table.Rows)
+                foreach (DataRow row in table.Rows)
                 {
-                    if(row["Id"].ToString() == user.Id)
+                    if (row["Id"].ToString() == user.Id)
                     {
                         row["Points"] = user.Points;
+                        row["Quizzes"] = user.Quizzes;
                     }
                 }
 
-                usersTableAdapter.Update(table);
-
+                adapter.Update(table);
 
                 connection.Close();
+
+                GetUserRank();
 
                 return true;
             }
@@ -155,7 +145,7 @@ namespace w61929_quiz
 
             try
             {
-                DataTable table = SelectQuery(query);
+                DataTable table = RunQuery(query);
                 DataRow[] rows = table.Select();
                 user.Rank = Convert.ToInt32(rows[0]["Rank"]);
                 return true;
@@ -177,7 +167,7 @@ namespace w61929_quiz
             try
             {
                 string query = "SELECT q.Id, q.Title, c.Name as Category, (SELECT COUNT(Id) FROM Questions WHERE QuizId = q.Id) as Number FROM Quizzes q LEFT JOIN Categories c ON q.Category = c.Id; ";
-                DataTable table = SelectQuery(query);
+                DataTable table = RunQuery(query);
                 table.Rows.Add(1, "Title", "Mathematics", 10);
 
                 foreach (DataRow row in table.Select())
@@ -210,7 +200,7 @@ namespace w61929_quiz
             
             try
             {
-                DataTable table = SelectQuery(query);
+                DataTable table = RunQuery(query);
 
                 foreach(DataRow row in table.Select())
                 {
@@ -240,7 +230,7 @@ namespace w61929_quiz
 
             try
             {
-                DataTable table = SelectQuery(query);
+                DataTable table = RunQuery(query);
 
                 foreach (DataRow row in table.Select())
                 {

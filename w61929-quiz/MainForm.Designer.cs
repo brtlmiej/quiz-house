@@ -35,11 +35,11 @@
             this.signInMenu1 = new w61929_quiz.SignInMenu();
             this.userStats1 = new w61929_quiz.UserStats();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.loadingPanel1 = new w61929_quiz.LoadingPanel();
+            this.welcomePanel1 = new w61929_quiz.WelcomePanel();
             this.scorePanel1 = new w61929_quiz.ScorePanel();
             this.votingPanel1 = new w61929_quiz.VotingPanel();
             this.listOfQuizzesPanel1 = new w61929_quiz.ListOfQuizzesPanel();
-            this.loadingPanel1 = new w61929_quiz.LoadingPanel();
-            this.welcomePanel1 = new w61929_quiz.WelcomePanel();
             this.btnNormal = new System.Windows.Forms.Button();
             this.btnMin = new System.Windows.Forms.Button();
             this.btnMax = new System.Windows.Forms.Button();
@@ -129,6 +129,31 @@
             this.panel1.Size = new System.Drawing.Size(926, 685);
             this.panel1.TabIndex = 8;
             // 
+            // loadingPanel1
+            // 
+            this.loadingPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.loadingPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(51)))));
+            this.loadingPanel1.Location = new System.Drawing.Point(76, 55);
+            this.loadingPanel1.Name = "loadingPanel1";
+            this.loadingPanel1.Size = new System.Drawing.Size(776, 576);
+            this.loadingPanel1.TabIndex = 5;
+            this.loadingPanel1.Visible = false;
+            // 
+            // welcomePanel1
+            // 
+            this.welcomePanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.welcomePanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(51)))));
+            this.welcomePanel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("welcomePanel1.BackgroundImage")));
+            this.welcomePanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.welcomePanel1.Location = new System.Drawing.Point(76, 76);
+            this.welcomePanel1.Name = "welcomePanel1";
+            this.welcomePanel1.Size = new System.Drawing.Size(776, 536);
+            this.welcomePanel1.TabIndex = 4;
+            // 
             // scorePanel1
             // 
             this.scorePanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -167,31 +192,6 @@
             this.listOfQuizzesPanel1.TabIndex = 6;
             this.listOfQuizzesPanel1.Visible = false;
             this.listOfQuizzesPanel1.VisibleChanged += new System.EventHandler(this.listOfQuizzesPanel1_VisibleChanged);
-            // 
-            // loadingPanel1
-            // 
-            this.loadingPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.loadingPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(51)))));
-            this.loadingPanel1.Location = new System.Drawing.Point(76, 55);
-            this.loadingPanel1.Name = "loadingPanel1";
-            this.loadingPanel1.Size = new System.Drawing.Size(776, 576);
-            this.loadingPanel1.TabIndex = 5;
-            this.loadingPanel1.Visible = false;
-            // 
-            // welcomePanel1
-            // 
-            this.welcomePanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.welcomePanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(51)))));
-            this.welcomePanel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("welcomePanel1.BackgroundImage")));
-            this.welcomePanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.welcomePanel1.Location = new System.Drawing.Point(76, 76);
-            this.welcomePanel1.Name = "welcomePanel1";
-            this.welcomePanel1.Size = new System.Drawing.Size(776, 536);
-            this.welcomePanel1.TabIndex = 4;
             // 
             // btnNormal
             // 

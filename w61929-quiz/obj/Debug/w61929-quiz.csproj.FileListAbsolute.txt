@@ -11,9 +11,10 @@ C:\Users\HP\source\repos\w61929-quiz\w61929-quiz\obj\Debug\w61929_quiz.QuizLinkP
 C:\Users\HP\source\repos\w61929-quiz\w61929-quiz\obj\Debug\w61929_quiz.VotingPanel.resources
 C:\Users\HP\source\repos\w61929-quiz\w61929-quiz\obj\Debug\w61929_quiz.ListOfQuizzesPanel.resources
 C:\Users\HP\source\repos\w61929-quiz\w61929-quiz\obj\Debug\w61929_quiz.LoadingPanel.resources
-C:\Users\HP\source\repos\w61929-quiz\w61929-quiz\bin\Debug\QHDatabase.mdf
-C:\Users\HP\source\repos\w61929-quiz\w61929-quiz\bin\Debug\QHDatabase_log.ldf
 C:\Users\HP\source\repos\w61929-quiz\w61929-quiz\obj\Debug\w61929_quiz.SignInMenu.resources
 C:\Users\HP\source\repos\w61929-quiz\w61929-quiz\obj\Debug\w61929_quiz.UserStats.resources
 C:\Users\HP\source\repos\w61929-quiz\w61929-quiz\obj\Debug\w61929_quiz.WelcomePanel.resources
 C:\Users\HP\source\repos\w61929-quiz\w61929-quiz\obj\Debug\w61929_quiz.ScorePanel.resources
+C:\Users\HP\source\repos\w61929-quiz\w61929-quiz\bin\Debug\Database.mdf
+C:\Users\HP\source\repos\w61929-quiz\w61929-quiz\bin\Debug\Database_log.ldf
+C:\Users\HP\source\repos\w61929-quiz\w61929-quiz\obj\Debug\w61929-quiz.csproj.CoreCompileInputs.cache
